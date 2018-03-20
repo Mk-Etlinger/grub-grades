@@ -4,7 +4,7 @@ import Search from './components/Search';
 import './App.css';
 
 const BASE_URL = 'https://data.cityofnewyork.us/resource/9w7m-hzhe.json?'
-const APP_TOKEN_PARAMS = '$$app_token='
+const APP_TOKEN = '&$$app_token=GXIFIUgqNVwTp36ZIqnkPcnXq'
 
 class App extends Component {
     constructor(){
@@ -18,9 +18,13 @@ class App extends Component {
 
     handleSearch = ( e ) => {
         e.preventDefault();
-        fetch( BASE_URL + `$order=grade_date DESC&dba=${ this.state.searchQuery }` )
+        fetch( BASE_URL + `&$order=grade_date DESC&dba=${ this.state.searchQuery }` + APP_TOKEN )
             .then( resp => resp.json() )
-            .then( data => this.setState({ restaurantList: [...data] }))
+            .then( data => {
+                // Need to handle blank responses from API
+                this.setState({ restaurantList: [...data] })
+            })
+            .catch( error => console.log('Error during fetch: ', error))
     }
     
     handleOnChange = ( e ) => {
@@ -28,10 +32,13 @@ class App extends Component {
     }
 
     render() {
+        // console.log(this.state.restaurantList)
         return (
         <div className="App">
             <Header />
-            <Search handleOnSearchCB={ this.handleSearch } onChangeCB={ this.handleOnChange } />
+            <Search value={ this.state.searchQuery }
+                handleOnSearchCB={ this.handleSearch } 
+                onChangeCB={ this.handleOnChange } />
         </div>
         );
     }
