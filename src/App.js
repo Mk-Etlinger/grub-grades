@@ -18,6 +18,9 @@ class App extends Component {
 
     handleSearch = ( e ) => {
         e.preventDefault();
+        fetch( BASE_URL + `$order=grade_date DESC&dba=${ this.state.searchQuery }` )
+            .then( resp => resp.json() )
+            .then( data => this.setState({ restaurantList: [...data] }))
     }
     
     handleOnChange = ( e ) => {
