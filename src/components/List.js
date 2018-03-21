@@ -2,7 +2,7 @@ import React from 'react';
 
 const List = ({ restaurants }) => {
     const uniqueIDs = [];
-    const uniqueRestaurants = restaurants.filter( rest, i => {
+    const uniqueRestaurants = restaurants.filter( rest => {
         let isUnique = false;
         if ( !uniqueIDs.includes( rest.camis )) {
             isUnique = true;
