@@ -1,6 +1,6 @@
 # Grub Grades
 * Check to see if your favorite restaurant has a passing grade
-* View the latest violation against a restaurant
+* View the latest violation against a restaurant(clean freaks rejoice!)
 
 ### Built with React | Fetches Data from the Socrata API and NYC Open Data
 * Fetches data based on SOQL language
