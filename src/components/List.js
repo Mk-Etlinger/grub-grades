@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from './Card';
 
 const List = ({ restaurants }) => {
     const uniqueIDs = [];
@@ -8,20 +9,15 @@ const List = ({ restaurants }) => {
             isUnique = true;
             uniqueIDs.push( rest.camis );
         }
-        return isUnique
+        return isUnique;
     })
 
     const displayRestaurants = uniqueRestaurants.map( rest => {
         // abstract out to table component
         return (
-            <div key={ rest.camis }>
-                <h1>{ rest.dba }</h1>
-                <h2>{ rest.grade }</h2>
-                <h4>{ rest.building + ' ' + rest.street }</h4>
-                <h4>{ rest.boro }</h4>
-                <h4>{ rest.violation_description }</h4>
-                <h4>{ rest.critical_flag }</h4>
-            </div>
+            <Card key={ rest.camis }
+                restaurant={ rest } />
+               
         )
     } )
     // console.log(displayRestaurants)
