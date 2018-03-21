@@ -2,8 +2,12 @@
   text-align: center;
 }
 
+body {
+  background-color: #f3f9fe;
+}
+
 .App-header {
-  background-color: #222;
+  background-color: #384144;
   height: 3em;
   padding: 30px;
   color: white;
