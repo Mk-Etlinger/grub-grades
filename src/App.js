@@ -6,8 +6,11 @@ import { upcaseString } from './utilities/upcaseString'
 import './App.css';
 
 const BASE_URL = 'https://data.cityofnewyork.us/resource/9w7m-hzhe.json?'
-const APP_TOKEN = '&$$app_token=GXIFIUgqNVwTp36ZIqnkPcnXq'
+const APP_TOKEN = '&$$app_token='
 const QUERY = ( query ) => `$where=dba LIKE '%${ query }%' AND grade IS NOT NULL&$order=grade_date DESC`
+// Put in .env
+// const BASE_URL = process.env.REACT_APP_BASE_URL
+// const APP_TOKEN = process.env.REACT_APP_API_TOKEN
 
 class App extends Component {
     constructor(){
