@@ -7,7 +7,7 @@ import './App.css';
 
 const BASE_URL = 'https://data.cityofnewyork.us/resource/9w7m-hzhe.json?'
 const APP_TOKEN = '&$$app_token=GXIFIUgqNVwTp36ZIqnkPcnXq'
-const QUERIES = '&$order=grade_date DESC&$where=GRADE IS NOT NULL'
+const QUERY = ( query ) => `$where=dba LIKE '%${ query }%' AND grade IS NOT NULL&$order=grade_date DESC`
 
 class App extends Component {
     constructor(){
@@ -21,9 +21,10 @@ class App extends Component {
 
     handleSearch = ( e ) => {
         e.preventDefault();
-        const capitalizedQuery = capitalizeString(this.state.searchQuery)
-
-        fetch( BASE_URL + `dba=${ capitalizedQuery }` + QUERIES + APP_TOKEN )
+        const upperCasedQuery = capitalizeString(this.state.searchQuery),
+            url = QUERY( upperCasedQuery ) + APP_TOKEN
+        
+        fetch( encodeURI( BASE_URL + url ))
             .then( resp => resp.json() )
             .then( data => {
                 // Need to handle blank responses from API
