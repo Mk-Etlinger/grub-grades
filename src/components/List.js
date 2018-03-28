@@ -9,9 +9,8 @@ const List = ({ restaurants, isSearching }) => {
         return (
             <Card key={ rest.camis }
                 restaurant={ rest } />
-               
         )
-    } )
+    })
 
     const displayNotFoundMessage = (
         isSearching && 
