@@ -1,9 +1,9 @@
 export const uniqueResults = ( restaurants, uniqueIDs = [] ) => (
-    restaurants.filter( rest => {
+    restaurants.filter( restaurant => {
         let isUnique = false;
-        if ( !uniqueIDs.includes( rest.camis )) {
+        if ( !uniqueIDs.includes( restaurant.camis )) {
             isUnique = true;
-            uniqueIDs.push( rest.camis );
+            uniqueIDs.push( restaurant.camis );
         }
     return isUnique;
     })
