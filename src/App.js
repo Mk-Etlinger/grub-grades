@@ -4,6 +4,7 @@ import Search from './components/Search';
 import List from './components/List';
 import { upcaseString } from './utilities/upcaseString';
 import { queryFormatter } from './utilities/queryFormatter';
+import fetchApiData from './api/fetchApiData';
 import './App.css';
 
 class App extends Component {
@@ -19,14 +20,11 @@ class App extends Component {
 
     handleSearch = ( e ) => {
         e.preventDefault();
-        const encodedURI = queryFormatter( this.state.searchQuery )
-        fetch( encodedURI )
-        .then( resp => resp.json() )
-        .then( data => {
-            this.setState({ restaurantList: [...data] })
-        })
-        .catch( error => console.log( 'Error during fetch: ', error ))
-        this.setState({ isSearching: true });
+        const encodedURI = queryFormatter( this.state.searchQuery );
+
+        fetchApiData( encodedURI )
+            .then( data => this.setState({ restaurantList: [...data], isSearching: true }))
+        
     }
     
     handleOnChange = ( e ) => {
@@ -37,13 +35,12 @@ class App extends Component {
         // console.log()
         return (
             <div className="App">
-                <Header />
+                <Header title='Grub Grades' />
                 <Search value={ this.state.searchQuery }
                     handleOnSearchCB={ this.handleSearch } 
                     onChangeCB={ this.handleOnChange } />
                 <List restaurants={ this.state.restaurantList }
-                    isSearching={ this.state.isSearching }
-                    hasResults={ this.state.hasResults } />
+                    isSearching={ this.state.isSearching } />
             </div>
         );
     }
