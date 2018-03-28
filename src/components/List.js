@@ -1,29 +1,27 @@
 import React from 'react';
 import Card from './Card';
+import { uniqueResults } from '../utilities/uniqueResults';
 
-const List = ({ restaurants }) => {
-    const uniqueIDs = [];
-    const uniqueRestaurants = restaurants.filter( rest => {
-        let isUnique = false;
-        if ( !uniqueIDs.includes( rest.camis )) {
-            isUnique = true;
-            uniqueIDs.push( rest.camis );
-        }
-        return isUnique;
-    })
+const List = ({ restaurants, isSearching }) => {
+    const uniqueRestaurants = uniqueResults( restaurants )
 
     const displayRestaurants = uniqueRestaurants.map( rest => {
-        // abstract out to table component
         return (
             <Card key={ rest.camis }
                 restaurant={ rest } />
                
         )
     } )
-    // console.log(displayRestaurants)
+
+    const displayNotFoundMessage = (
+        isSearching && 
+            !displayRestaurants.length &&
+            "Restaurant not found"
+    )
     return ( 
         <div>
-            { displayRestaurants }
+            { displayRestaurants } 
+            { displayNotFoundMessage }
         </div>
     )
 }
