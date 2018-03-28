@@ -14,24 +14,25 @@ class Card extends Component {
         }
     }
 
-    showViolation = () => this.setState({ showViolation: true })
+    handleShowViolation = () => this.setState({ showViolation: true })
 
     render() {
         const { restaurant } = this.props,
-            { gradeColor } = this.state
+            { gradeColor, showViolation } = this.state
         return ( 
             <figure style={ cardStyles }>
                 <h1 style={ titleStyle }>{ restaurant.dba }</h1>
-                <h2 style={ {...gradeStyle, background: gradeColor[restaurant.grade] } }>{ restaurant.grade }</h2>
+                <h2 style={{ ...gradeStyle, background: gradeColor[restaurant.grade] }}>{ restaurant.grade }</h2>
                 <h4 style={ addressStyle }>
                     { restaurant.building + ' ' + restaurant.street + ' ' }
                     &#8226; { restaurant.boro }
                 </h4>
                 <div style={ violationStyle }>
-                    { this.state.showViolation || <button style={ buttonStyle } onClick={ this.showViolation }>
-                        Latest Violation
-                    </button> }
-                    { this.state.showViolation && 
+                    { showViolation || 
+                        <button style={ buttonStyle } onClick={ this.handleShowViolation }>
+                            Latest Violation
+                        </button> }
+                    { showViolation && 
                         <div>
                             <h4>{ restaurant.critical_flag }</h4>
                             <p>{ restaurant.violation_description }</p>
