@@ -1,6 +1,7 @@
 ## Features:
 
 * Find a restaurant by type and grade, or quick find.
+* Show loading after search
 * Map restaurants via google maps with plots as A, B, C
 * Game mode: Show a restaurant name and see if you can guess the grade
 
