@@ -3,7 +3,7 @@ import React from 'react';
 const Search = ({ handleOnSearchCB, onChangeCB, value }) => {
     return ( 
         <div> 
-            <h1 style={ h1Style }>Enter your favorite restaurant:</h1>
+            <h1 style={ h1Style }>Enter your favorite NYC restaurant:</h1>
             <form onSubmit={ handleOnSearchCB }>
                 <input style={ searchStyle } type="text" 
                     onChange={ onChangeCB } 
