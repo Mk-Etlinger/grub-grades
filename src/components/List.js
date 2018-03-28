@@ -2,8 +2,8 @@ import React from 'react';
 import Card from './Card';
 import { uniqueResults } from '../utilities/uniqueResults';
 
-const List = ({ restaurants, isSearching }) => {
-    const uniqueRestaurants = uniqueResults( restaurants )
+const List = ({ data, isSearching }) => {
+    const uniqueRestaurants = uniqueResults( data )
 
     const displayRestaurants = uniqueRestaurants.map( rest => {
         return (
