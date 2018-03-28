@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import Search from './components/Search';
 import List from './components/List';
-import { upcaseString } from './utilities/upcaseString';
 import { queryFormatter } from './utilities/queryFormatter';
 import fetchApiData from './api/fetchApiData';
 import './App.css';
@@ -39,7 +38,7 @@ class App extends Component {
                 <Search value={ this.state.searchQuery }
                     handleOnSearchCB={ this.handleSearch } 
                     onChangeCB={ this.handleOnChange } />
-                <List restaurants={ this.state.restaurantList }
+                <List data={ this.state.restaurantList }
                     isSearching={ this.state.isSearching } />
             </div>
         );
