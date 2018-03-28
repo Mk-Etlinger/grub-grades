@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import Search from './components/Search';
 import List from './components/List';
-import { upcaseString } from './utilities/upcaseString'
+import { upcaseString } from './utilities/upcaseString';
+import { queryFormatter } from './utilities/queryFormatter';
 import './App.css';
-
-const BASE_URL = 'https://data.cityofnewyork.us/resource/9w7m-hzhe.json?'
-const APP_TOKEN = '&$$app_token='
-const QUERY = ( query ) => `$where=dba LIKE '%${ query }%' AND grade IS NOT NULL&$order=grade_date DESC`
-// Put in .env
-// const BASE_URL = process.env.REACT_APP_BASE_URL
-// const APP_TOKEN = process.env.REACT_APP_API_TOKEN
 
 class App extends Component {
     constructor(){
@@ -19,21 +13,20 @@ class App extends Component {
         this.state = {
             searchQuery: '',
             restaurantList: [],
+            isSearching: false,
         }
     }
 
     handleSearch = ( e ) => {
         e.preventDefault();
-        const upperCasedQuery = upcaseString(this.state.searchQuery),
-            queries = QUERY( upperCasedQuery ) + APP_TOKEN
-        
-        fetch( encodeURI( BASE_URL + queries ))
-            .then( resp => resp.json() )
-            .then( data => {
-                // Need to handle blank responses from API
-                this.setState({ restaurantList: [...data] })
-            })
-            .catch( error => console.log( 'Error during fetch: ', error ))
+        const encodedURI = queryFormatter( this.state.searchQuery )
+        fetch( encodedURI )
+        .then( resp => resp.json() )
+        .then( data => {
+            this.setState({ restaurantList: [...data] })
+        })
+        .catch( error => console.log( 'Error during fetch: ', error ))
+        this.setState({ isSearching: true });
     }
     
     handleOnChange = ( e ) => {
@@ -41,13 +34,16 @@ class App extends Component {
     }
 
     render() {
+        // console.log()
         return (
             <div className="App">
                 <Header />
                 <Search value={ this.state.searchQuery }
                     handleOnSearchCB={ this.handleSearch } 
                     onChangeCB={ this.handleOnChange } />
-                <List restaurants={ this.state.restaurantList }/>
+                <List restaurants={ this.state.restaurantList }
+                    isSearching={ this.state.isSearching }
+                    hasResults={ this.state.hasResults } />
             </div>
         );
     }
