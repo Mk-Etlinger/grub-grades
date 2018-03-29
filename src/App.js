@@ -31,7 +31,6 @@ class App extends Component {
     }
 
     render() {
-        // console.log()
         return (
             <div className="App">
                 <Header title='Grub Grades' />
