@@ -1,47 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Card extends Component {
-    constructor(){
-        super()
-
-        this.state = {
-            showViolation: false,
-            gradeColor: {
-                A: '#ADD8E6',
-                B: '#98FB98',
-                C: '#ff7f7f'
-            }
-        }
-    }
-
-    handleShowViolation = () => this.setState({ showViolation: true })
-
-    render() {
-        const { restaurant } = this.props,
-            { gradeColor, showViolation } = this.state
-        return ( 
-            <figure style={ cardStyles }>
-                <h1 style={ titleStyle }>{ restaurant.dba }</h1>
-                <h2 style={{ ...gradeStyle, background: gradeColor[restaurant.grade] }}>{ restaurant.grade }</h2>
-                <h4 style={ addressStyle }>
-                    { restaurant.building + ' ' + restaurant.street + ' ' }
-                    &#8226; { restaurant.boro }
-                </h4>
-                <div style={ violationStyle }>
-                    { showViolation || 
-                        <button style={ buttonStyle } onClick={ this.handleShowViolation }>
-                            Latest Violation
-                        </button> }
-                    { showViolation && 
-                        <div>
-                            <h4>{ restaurant.critical_flag }</h4>
-                            <p>{ restaurant.violation_description }</p>
-                        </div>
-                    }
-                </div>
-            </figure>
-        )
-    }
+const Card = ({ restaurant, gradeColor, showViolation, handleClick }) => {
+    return (
+        <figure style={ cardStyles }>
+            <h1 style={ titleStyle }>{ restaurant.dba }</h1>
+            <h2 style={{ ...gradeStyle, background: gradeColor[restaurant.grade] }}>{ restaurant.grade }</h2>
+            <h4 style={ addressStyle }>
+                { restaurant.building + ' ' + restaurant.street + ' ' }
+                &#8226; { restaurant.boro }
+            </h4>
+            <div style={ violationStyle }>
+                { showViolation || 
+                    <button style={ buttonStyle } onClick={ handleClick }>
+                        Latest Violation
+                    </button> }
+                { showViolation && 
+                    <div>
+                        <h4>{ restaurant.critical_flag }</h4>
+                        <p>{ restaurant.violation_description }</p>
+                    </div>
+                }
+            </div>
+        </figure>
+    )
 }
 
 export default Card;
@@ -66,6 +47,7 @@ const gradeStyle =  {
     padding: '0',
     order: '-1'
 }
+
 const titleStyle =  {
     gridColumn: '2 / 4',
     marginRight: '40%',
