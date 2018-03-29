@@ -4,7 +4,7 @@ import Search from './components/Search';
 import List from './components/List';
 import { queryFormatter } from './utilities/queryFormatter';
 import fetchApiData from './api/fetchApiData';
-import './App.css';
+import './css/App.css';
 
 class App extends Component {
     constructor(){
