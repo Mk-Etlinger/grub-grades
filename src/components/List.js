@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from './Card';
+import CardContainer from './CardContainer';
 import { uniqueResults } from '../utilities/uniqueResults';
 
 const List = ({ data, isSearching }) => {
@@ -7,7 +7,7 @@ const List = ({ data, isSearching }) => {
 
     const displayRestaurants = uniqueRestaurants.map( rest => {
         return (
-            <Card key={ rest.camis }
+            <CardContainer key={ rest.camis }
                 restaurant={ rest } />
         )
     })
