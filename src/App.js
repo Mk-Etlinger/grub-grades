@@ -22,7 +22,7 @@ class App extends Component {
         const encodedURI = queryFormatter( this.state.searchQuery );
 
         fetchApiData( encodedURI )
-            .then( data => this.setState({ restaurantList: [...data], isSearching: true }))
+            .then( jsonData => this.setState({ restaurantList: [...jsonData], isSearching: true }))
         
     }
     
@@ -34,7 +34,8 @@ class App extends Component {
         return (
             <div className="App">
                 <Header title='Grub Grades' />
-                <Search value={ this.state.searchQuery }
+                <Search placeholder='E.g: Cafe Mogador, Bunna Cafe'
+                    value={ this.state.searchQuery }
                     handleOnSearchCB={ this.handleSearch } 
                     onChangeCB={ this.handleOnChange } />
                 <List data={ this.state.restaurantList }
