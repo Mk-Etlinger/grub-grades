@@ -5,6 +5,6 @@ export const uniqueResults = ( restaurants, uniqueIDs = [] ) => (
             isUnique = true;
             uniqueIDs.push( restaurant.camis );
         }
-    return isUnique;
+        return isUnique;
     })
 )
