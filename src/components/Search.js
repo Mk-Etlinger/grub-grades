@@ -1,14 +1,15 @@
 import React from 'react';
 
-const Search = ({ handleOnSearchCB, onChangeCB, value }) => {
+const Search = ({ handleOnSearchCB, onChangeCB, placeholder, value }) => {
     return ( 
         <div> 
             <h1 style={ h1Style }>Enter your favorite NYC restaurant:</h1>
             <form onSubmit={ handleOnSearchCB }>
-                <input style={ searchStyle } type="text" 
-                    onChange={ onChangeCB } 
-                    value={ value } 
-                    placeholder='E.g: Cafe Mogador, Bunna Cafe' />
+                <input type="text"
+                    value={ value }
+                    style={ searchStyle }
+                    onChange={ onChangeCB }  
+                    placeholder={ placeholder } />
                 <input style={ buttonStyle } type="submit" value='Search' />
             </form>
         </div>
