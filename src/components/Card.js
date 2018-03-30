@@ -1,24 +1,26 @@
 import React from 'react';
 
-const Card = ({ restaurant, gradeColor, showViolation, handleClick }) => {
+const Card = ({ restaurant, showViolation, handleClick }) => {
     return (
         <figure style={ cardStyles }>
             <h1 style={ titleStyle }>{ restaurant.dba }</h1>
             <h2 style={{ ...gradeStyle, background: gradeColor[restaurant.grade] }}>{ restaurant.grade }</h2>
             <h4 style={ addressStyle }>
-                { restaurant.building + ' ' + restaurant.street + ' ' }
-                &#8226; { restaurant.boro }
+                <span> 
+                    { restaurant.building + ' ' + restaurant.street + ' ' }
+                    &#8226; { restaurant.boro }
+                </span>
             </h4>
             <div style={ violationStyle }>
-                { showViolation || 
-                    <button style={ buttonStyle } onClick={ handleClick }>
-                        Latest Violation
-                    </button> }
-                { showViolation && 
+                { showViolation ?
                     <div>
                         <h4>{ restaurant.critical_flag }</h4>
                         <p>{ restaurant.violation_description }</p>
                     </div>
+                :
+                    <button style={ buttonStyle } onClick={ handleClick }>
+                        Latest Violation
+                    </button>
                 }
             </div>
         </figure>
@@ -26,6 +28,12 @@ const Card = ({ restaurant, gradeColor, showViolation, handleClick }) => {
 }
 
 export default Card;
+
+const gradeColor = {
+    A: '#ADD8E6',
+    B: '#98FB98',
+    C: '#ff7f7f'
+}
 
 const cardStyles =  {
     display: 'grid',
