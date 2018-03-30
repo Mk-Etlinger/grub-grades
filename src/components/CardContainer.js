@@ -7,11 +7,6 @@ class CardContainer extends Component {
 
         this.state = {
             showViolation: false,
-            gradeColor: {
-                A: '#ADD8E6',
-                B: '#98FB98',
-                C: '#ff7f7f'
-            }
         }
     }
 
