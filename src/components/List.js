@@ -15,8 +15,9 @@ const List = ({ data, isSearching }) => {
     const displayNotFoundMessage = (
         isSearching && 
             !displayRestaurants.length &&
-            "Restaurant not found"
+            <p style={ notFoundStyle }>Restaurant not found!</p>
     )
+    
     return ( 
         <div>
             { displayRestaurants } 
@@ -29,4 +30,10 @@ export default List;
 
 List.defaultProps = {
     data: [],
+}
+
+const notFoundStyle = {
+    fontSize: '1.5em',
+    color: 'red',
+    fontFamily: 'monospace',
 }
